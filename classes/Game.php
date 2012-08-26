@@ -4,13 +4,15 @@ class Game
 {
     private static $_gameDictionary = array(
         'north','east','west','south',
-        'help','look'
+        'help','look','take','drop',
+        'inventory',
     );
     private static $_aliases = array(
         'n' => 'north',
         's' => 'south',
         'w' => 'west',
         'e' => 'east',
+        'i' => 'inventory',
     );
 
     private static $_gameMaze = null;
@@ -29,6 +31,9 @@ class Game
 
         $northRoom->setRoomDescription("It's a north room of tower. Old prison for political prisoners.");
         $southRoom->setRoomDescription("Nice room with orange walls. Warm wind blows from ventilation on top.");
+
+        $box = new Item('test_box');
+        $northRoom->putItem($box);
 
         $gameMaze->addRoom($northRoom);
         $gameMaze->addRoom($southRoom);
@@ -54,6 +59,10 @@ class Game
 
     public static function executeCommand($command)
     {
+        if (strpos($command, ' ') !== false) {
+            list ($command, $param) = explode(' ', $command, 2);
+        }
+
         // check for aliases
         if (strlen($command) < 3) {
             $command = self::getFullCommandFromAlias($command);
@@ -81,6 +90,28 @@ class Game
             case 'look':
                 // now get room description. Now - just get door positions.
                 $message = $player->getCurrentRoom()->getRoomDescription();
+                break;
+
+            case 'inventory':
+                $message = $player->getInventoryList();
+                break;
+
+            case 'take':
+                $result = $player->takeItem($param);
+                if ($result === true) {
+                    $message = "You take " . $param . ".";
+                } else {
+                    $message = "This room no have " . $param . " item.";
+                }
+                break;
+
+            case 'drop':
+                $result = $player->dropItem($param);
+                if ($result === true) {
+                    $message = "You drop " . $param . ".";
+                } else {
+                    $message = "You do not have " . $param . " item.";
+                }
                 break;
 
             default:
