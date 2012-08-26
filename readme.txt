@@ -15,7 +15,8 @@ west (w)
 east (e)
 
 look - show description of current player location
+inventory (i) - get player's inventory list
+
 take <item_id> - take <item_id> and put it into player inventory
 drop <item_id> - drop <item_id> from inventory.
 
-exitgame
