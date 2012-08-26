@@ -1,16 +1,19 @@
-простая текстовая бродилка по локациям
+Simple text-game quest engine for PHP (write on PHP 5.3.5).
 
-что нужно реализовать:
+starts from console with command:
+$ php index.php
 
-1. хранилище карты (в виде файла с условными обозначениями для типов комнат)
-  - файл-карта
-  - парсер карты и сохранение её в виде кэш-массива, с которым будет работать в дальнейшем
-    при первом запуске парсер читает карту, строит массив и сохраняет его для последующей работы
+to exit game type:
+exitgame
 
-2. система комманд:
-  - north, south, west, east (nswe)
-  - look (выводит описание локации) кстати - продумать как хранить описание к карте???
-  - соответсвенно - система перемещения по локациям - тут же.
 
-==========================
+For now works only commands:
 
+north (n)
+south (s)
+west (w)
+east (e)
+
+look - show description of current player location
+
+exitgame
