@@ -49,21 +49,21 @@ class Player
 
     /**
      * @param $itemId string
-     * @return bool
+     * @return string
      */
     public function takeItem($itemId)
     {
         $item = $this->_currentRoom->getItem($itemId);
         if (!is_null($item)) {
             $this->_items[$itemId] = $item;
-            return true;
+            return "You take " . $itemId . ".";
         }
-        return false;
+        return "This room no have " . $itemId . " item.";
     }
 
     /**
      * @param $itemId string
-     * @return bool
+     * @return string
      */
     public function dropItem($itemId)
     {
@@ -71,9 +71,9 @@ class Player
             $item = $this->_items[$itemId];
             unset($this->_items[$itemId]);
             $this->_currentRoom->putItem($item);
-            return true;
+            return "You drop " . $itemId . ".";
         }
-        return false;
+        return "You do not have " . $itemId . " item.";
     }
 
     /**

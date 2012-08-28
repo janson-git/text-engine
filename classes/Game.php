@@ -32,6 +32,7 @@ class Game
         $northRoom->setRoomDescription("It's a north room of tower. Old prison for political prisoners.");
         $southRoom->setRoomDescription("Nice room with orange walls. Warm wind blows from ventilation on top.");
 
+        // add test item to north room (! for future - items must have some properties)
         $box = new Item('test_box');
         $northRoom->putItem($box);
 
@@ -97,21 +98,11 @@ class Game
                 break;
 
             case 'take':
-                $result = $player->takeItem($param);
-                if ($result === true) {
-                    $message = "You take " . $param . ".";
-                } else {
-                    $message = "This room no have " . $param . " item.";
-                }
+                $message = $player->takeItem($param);
                 break;
 
             case 'drop':
-                $result = $player->dropItem($param);
-                if ($result === true) {
-                    $message = "You drop " . $param . ".";
-                } else {
-                    $message = "You do not have " . $param . " item.";
-                }
+                $message = $player->dropItem($param);
                 break;
 
             default:

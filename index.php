@@ -3,6 +3,7 @@
 error_reporting(E_ALL | E_STRICT);
 
 define('GAME_DIR', __DIR__);
+define('DIRECTIONS', array('north', 'south', 'west', 'east'));
 
 function gameAutoloader($className)
 {
