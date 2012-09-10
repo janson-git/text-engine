@@ -4,14 +4,10 @@ error_reporting(E_ALL | E_STRICT);
 
 define('GAME_DIR', __DIR__);
 
-function gameAutoloader($className) {
-    $filename = GAME_DIR . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . $className . '.php';
-    if (file_exists($filename) && is_readable($filename)) {
-        include $filename;
-    }
-}
-
-spl_autoload_register('gameAutoloader');
+require_once GAME_DIR . DIRECTORY_SEPARATOR . 'core/Autoloader.php';
+$autoloader = new Autoloader();
+$autoloader->addPath(GAME_DIR . DIRECTORY_SEPARATOR . 'core');
+$autoloader->register();
 
 
 Game::setMazeConfigFilePath(GAME_DIR . DIRECTORY_SEPARATOR . 'gameMazeConfig.php');
