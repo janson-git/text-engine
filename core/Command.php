@@ -2,7 +2,6 @@
 
 class Command
 {
-
     public static function look($param)
     {
         return Player::getInstance()->getCurrentRoom()->getRoomDescription();
@@ -30,6 +29,9 @@ class Command
     
     public static function go($param)
     {
+        if (empty($param)) {
+            return 'What direction?';
+        }
         return Player::getInstance()->go($param);
     }
     

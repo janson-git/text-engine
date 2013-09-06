@@ -145,7 +145,7 @@ class Game
         } else {
             $message = "Hmmm... I don't now what I shall do.";
         }
-        fputs(STDOUT, $message . "\n" . self::$_promptLine);
+        fputs(STDOUT, $message . "\n");
         return true;
     }
 

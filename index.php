@@ -16,9 +16,16 @@ Game::createMaze(new MapMazeFactory());
 // start game with look for current room
 Game::executeCommand('look');
 
+
+readline_completion_function(function($currWord, $stringPosition) {
+    return GameDictionary::getCommandsList();
+});
+
+
 // START GAME LOOP. 'exit' command will stop execution
 while (true) {
-    $command = fgets(STDIN);
+//    $command = fgets(STDIN);
+    $command = readline("> ");
     $command = trim($command);
     if ($command == 'exitgame' || $command == 'exit') {
         break;

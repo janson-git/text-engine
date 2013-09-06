@@ -81,7 +81,7 @@ class Player
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getInventoryList()
     {
