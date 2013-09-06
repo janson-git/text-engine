@@ -26,6 +26,7 @@ class MapRoom extends MapSite
         if (isset($this->_sides[$direction])) {
             return $this->_sides[$direction];
         }
+        return null;
     }
 
     public function setSide($direction, MapSite $type)

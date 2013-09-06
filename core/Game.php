@@ -2,19 +2,6 @@
 
 class Game
 {
-    private static $_gameDictionary = array(
-        'north','east','west','south',
-        'help','look','take','drop',
-        'inventory',
-    );
-    private static $_aliases = array(
-        'n' => 'north',
-        's' => 'south',
-        'w' => 'west',
-        'e' => 'east',
-        'i' => 'inventory',
-    );
-
     private static $_mazeConfigFilePath = null;
     private static $_mazeConfig = null;
     private static $_gameMaze = null;
@@ -122,6 +109,15 @@ class Game
     }
 
 
+    private static $_aliases = array(
+        'n' => 'north',
+        's' => 'south',
+        'w' => 'west',
+        'e' => 'east',
+        'i' => 'inventory',
+        'l' => 'look',
+    );
+    
     /**
      * @static
      * @param string $command
@@ -139,7 +135,7 @@ class Game
             $command = self::getFullCommandFromAlias($command);
         }
 
-        if (!in_array($command, self::$_gameDictionary)) {
+        if (!self::isCommandExists($command)) {
             fputs(STDOUT, "Hey! I don't know what are you talking about!\n");
             return false;
         }
@@ -154,6 +150,21 @@ class Game
     }
 
 
+    /**
+     * Check command exists in game dictionary
+     * @param $command
+     * @return bool
+     */
+    private static function isCommandExists($command)
+    {
+        return method_exists('Command', $command);
+    }
+
+    /**
+     * Check aliases list for full command
+     * @param $command
+     * @return mixed
+     */
     private static function getFullCommandFromAlias($command) {
         $aliases = array_keys(self::$_aliases);
         if (in_array($command, $aliases)) {

@@ -27,6 +27,12 @@ class Command
     {
         return Player::getInstance()->go('west');
     }
+    
+    public static function go($param)
+    {
+        return Player::getInstance()->go($param);
+    }
+    
 
     public static function help()
     {
@@ -70,6 +76,16 @@ class Command
             return implode("\n", $messages);
         }
         return $player->takeItem($param);
+    }
+
+    /**
+     * Alias to 'take' command
+     * @param $param
+     * @return string
+     */
+    public static function get($param)
+    {
+        return self::take($param);
     }
 
 

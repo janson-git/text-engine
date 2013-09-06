@@ -2,6 +2,7 @@
 
 class Player
 {
+    /** @var MapRoom */
     private $_currentRoom = null;
     private $_items = array();
 
@@ -43,7 +44,10 @@ class Player
     public function go($direction)
     {
         $directionSide = $this->_currentRoom->getSide($direction);
-        return $directionSide->enter();
+        if ($directionSide instanceof MapDoor) {
+            return $directionSide->enter();
+        }
+        return 'Splash! You can\'t go to this direction!';
     }
 
 
