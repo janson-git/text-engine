@@ -3,6 +3,9 @@ text-engine
 
 some homework for text-game engine :) just for fun
 
+Simple text-game quest engine for PHP (PHP 5.4).
+Supports readline completes for command hints.
+
 Start:
 
   $ php index.php
@@ -24,16 +27,9 @@ For example:
   > go north
   
 
-Allowed some aliases for commands:
+And list of supported commands:
+ _look_ ( _l_ ), _go_, _north_ ( _n_ ), _south_ ( _s_ ), _west_ ( _w_ ), _east_ ( _e_ ), _inventory_ ( _i_ ), _take_ (and _get_ alias), _drop_.
+ 
+Commands _take_ and _drop_ can accept item name to drop or _all_ param (to take all room's items or drop all inventory items):
 
-_n_ - go north
-
-_s_ - go south
-
-_w_ - go west
-
-_e_ - go east
-
-_i_ - inventory
-
-_l_ - look
+  > take test_box
