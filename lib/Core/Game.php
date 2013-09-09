@@ -132,7 +132,7 @@ class Game
         if (function_exists('readline_completion_function')) {
             readline_completion_function(function($currWord, $stringPosition, $cursorInLine) {
                 $fullLine = readline_info()['line_buffer'];
-                // если это не первое слово - возвращаем список предметов.
+                // if not first word - return list of items for current room and player inventory
                 if (strrpos($fullLine, ' ') !== false && strrpos($fullLine, ' ') < strrpos($fullLine, $currWord)) {
                     $roomItems = Player::getInstance()->getCurrentRoom()->getRoomItemsNamesList();
                     $playerItems = Player::getInstance()->getInventoryList();
@@ -143,7 +143,7 @@ class Game
                     $items = array_unique(array_merge($roomItems, $playerItems));
                     return $items;
                 }
-                // возвращаем список комманд
+                // return commands
                 return Dictionary::getCommandsList();
             });
         }
@@ -152,7 +152,7 @@ class Game
     /**
      * @return string
      */
-    public static function getCommand()
+    public static function readCommand()
     {
         if (function_exists('readline')) {
             $command = readline(self::$_promptLine);

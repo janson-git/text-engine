@@ -91,31 +91,20 @@ class MapRoom extends MapSite
 
 
     /**
-     * @param string $partOfname
      * @return Item[]
      */
-    public function getRoomItemsList($partOfname = '')
+    public function getRoomItemsList()
     {
-        if (!empty($partOfname)) {
-            $temps = [];
-            foreach ($this->_items as $item) {
-                if (strpos($item->getId(), $partOfname) !== false) {
-                    array_push($temps, $item);
-                }
-            }
-            return $temps;
-        }
         return $this->_items;
     }
 
     /**
-     * @param string $partOfName
      * @return array
      */
-    public function getRoomItemsNamesList($partOfName = '')
+    public function getRoomItemsNamesList()
     {
         $itemNames = [];
-        $roomItems = $this->getRoomItemsList($partOfName);
+        $roomItems = $this->getRoomItemsList();
         if (count($roomItems) > 0) {
             foreach ($roomItems as $item) {
                 $itemNames[] = $item->getId();

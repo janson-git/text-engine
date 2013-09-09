@@ -10,23 +10,25 @@ $autoloader->addPath(GAME_DIR . DIRECTORY_SEPARATOR . 'lib');
 $autoloader->register();
 
 
-Core\Game::setMazeConfigFilePath(GAME_DIR . DIRECTORY_SEPARATOR . 'gameMazeConfig.php');
-Core\Game::createMaze(new Core\MapMazeFactory());
+use Core\Game;
+
+Game::setMazeConfigFilePath(GAME_DIR . DIRECTORY_SEPARATOR . 'gameMazeConfig.php');
+Game::createMaze(new Core\MapMazeFactory());
 
 // start game with look for current room
-Core\Game::executeCommand('look');
+Game::executeCommand('look');
 // game commands completion if accessible
-Core\Game::tryInitCommandCompletion();
+Game::tryInitCommandCompletion();
 
 // START GAME LOOP. 'exit' command will stop execution
 while (true) {
-    $command = Core\Game::getCommand();
+    $command = Game::readCommand();
     $command = trim($command);
     if ($command == 'exitgame' || $command == 'exit') {
         break;
     }
 
-    Core\Game::executeCommand($command);
+    Game::executeCommand($command);
 }
 
 exit;
