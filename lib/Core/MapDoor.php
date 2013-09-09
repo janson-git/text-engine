@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class MapDoor extends MapSite
 {
     public function __construct(MapRoom $room1, MapRoom $room2)

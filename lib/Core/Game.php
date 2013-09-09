@@ -1,11 +1,16 @@
 <?php
 
+namespace Core;
+
+use Core\Dictionary\Commands;
+
 class Game
 {
     private static $_mazeConfigFilePath = null;
     private static $_mazeConfig = null;
     private static $_gameMaze = null;
 
+    // проверяются направления, для построения лабиринта
     private static $_directions = array('north', 'south', 'west', 'east');
 
     /**
@@ -58,6 +63,9 @@ class Game
                     $itemObj = new Item($item['id']);
                     $itemObj->setDescription($item['description']);
                     $roomObj->putItem($itemObj);
+                 
+                    // fill game dictionary
+                    Dictionary::addItemName($item['id']);
                 }
             }
 
@@ -117,6 +125,44 @@ class Game
         'i' => 'inventory',
         'l' => 'look',
     );
+
+
+    public static function tryInitCommandCompletion()
+    {
+        // if readline lib accessible - use it for command completions
+        if (function_exists('readline_completion_function')) {
+            readline_completion_function(function($currWord, $stringPosition, $cursorInLine) {
+                $fullLine = readline_info()['line_buffer'];
+                // если это не первое слово - возвращаем список предметов.
+                if (strrpos($fullLine, ' ') !== false && strrpos($fullLine, ' ') < strrpos($fullLine, $currWord)) {
+                    $roomItems = Player::getInstance()->getCurrentRoom()->getRoomItemsNamesList();
+                    $playerItems = Player::getInstance()->getInventoryList();
+                    $itemNames = array();
+                    foreach ($playerItems as $itemId => $item) {
+                        $itemNames[] = $itemId;
+                    }
+                    $items = array_unique(array_merge($roomItems, $playerItems));
+                    return $items;
+                }
+                // возвращаем список комманд
+                return Dictionary::getCommandsList();
+            });
+        }
+    }
+    
+    /**
+     * @return string
+     */
+    public static function getCommand()
+    {
+        if (function_exists('readline')) {
+            $command = readline(self::$_promptLine);
+        } else {
+            fputs(STDOUT, self::$_promptLine);
+            $command = fgets(STDIN);
+        }
+        return $command;
+    }
     
     /**
      * @static
@@ -135,12 +181,14 @@ class Game
             $command = self::getFullCommandFromAlias($command);
         }
 
+        // NEED TO CHECK EXISTS COMMAND (verb) (or check full game dictionary for words?)
         if (!self::isCommandExists($command)) {
             fputs(STDOUT, "Hey! I don't know what are you talking about!\n");
             return false;
         }
 
-        if (method_exists('Command', $command)) {
+        // AND NOW CHECK FOR COMMAND AND RUN IT (check just command and run?)
+        if (self::isCommandExists($command)) {
             $message = Command::$command($param);
         } else {
             $message = "Hmmm... I don't now what I shall do.";
@@ -157,7 +205,7 @@ class Game
      */
     private static function isCommandExists($command)
     {
-        return method_exists('Command', $command);
+        return in_array($command, Dictionary::getCommandsList());
     }
 
     /**

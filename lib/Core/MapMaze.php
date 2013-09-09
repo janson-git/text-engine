@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class MapMaze
 {
     private $_rooms = array();

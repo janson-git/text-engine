@@ -1,10 +1,14 @@
 <?php
 
+namespace Core;
+
+
 class MapRoom extends MapSite
 {
     private $_sides = array();
     private $_roomId;
     private $_description;
+    /** @var Item[] array  */
     private $_items = array();
 
 
@@ -85,12 +89,39 @@ class MapRoom extends MapSite
         return null;
     }
 
+
     /**
+     * @param string $partOfname
+     * @return Item[]
+     */
+    public function getRoomItemsList($partOfname = '')
+    {
+        if (!empty($partOfname)) {
+            $temps = [];
+            foreach ($this->_items as $item) {
+                if (strpos($item->getId(), $partOfname) !== false) {
+                    array_push($temps, $item);
+                }
+            }
+            return $temps;
+        }
+        return $this->_items;
+    }
+
+    /**
+     * @param string $partOfName
      * @return array
      */
-    public function getRoomItemsList()
+    public function getRoomItemsNamesList($partOfName = '')
     {
-        return $this->_items;
+        $itemNames = [];
+        $roomItems = $this->getRoomItemsList($partOfName);
+        if (count($roomItems) > 0) {
+            foreach ($roomItems as $item) {
+                $itemNames[] = $item->getId();
+            }
+        }
+        return $itemNames;
     }
 
 

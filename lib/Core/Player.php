@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Player
 {
     /** @var MapRoom */
@@ -57,6 +59,18 @@ class Player
      */
     public function takeItem($itemId)
     {
+        // check $itemId - may be it just a part of item name
+        // example: given 'test', but we have test_sword and test_box in room.
+        $roomItems = $this->_currentRoom->getRoomItemsNamesList($itemId);
+        
+        if (count($roomItems) > 1) {
+            return "What are you want to take: " . implode(', ', $roomItems);
+        }
+        
+        if (count($roomItems) === 1) {
+            $itemId = array_pop($roomItems);
+        }
+        
         $item = $this->_currentRoom->getItem($itemId);
         if (!is_null($item)) {
             $this->_items[$itemId] = $item;

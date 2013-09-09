@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class MapWall extends MapSite
 {
     public function __construct() {}

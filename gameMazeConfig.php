@@ -22,6 +22,12 @@ return array(
                 'north' => 'northRoom',
             ),
             'description' => "Nice room with orange walls. Warm wind blows from ventilation on top.",
+            'items' => [
+                'test_sword' => [
+                    'id' => 'test_sword',
+                    'description' => 'A little sharp test sword.'
+                ],
+            ],
         ),
     ),
 );

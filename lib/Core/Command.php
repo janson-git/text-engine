@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Command
 {
     public static function look($param)
@@ -26,7 +28,11 @@ class Command
     {
         return Player::getInstance()->go('west');
     }
-    
+
+    /**
+     * @param $param
+     * @return string
+     */
     public static function go($param)
     {
         if (empty($param)) {
@@ -42,6 +48,9 @@ class Command
     }
 
 
+    /**
+     * @return string
+     */
     public static function inventory()
     {
         $items = Player::getInstance()->getInventoryList();
@@ -60,6 +69,10 @@ class Command
         return $message;
     }
 
+    /**
+     * @param $param
+     * @return string
+     */
     public static function take($param)
     {
         if (empty($param)) {
@@ -90,7 +103,10 @@ class Command
         return self::take($param);
     }
 
-
+    /**
+     * @param $param
+     * @return string
+     */
     public static function drop($param)
     {
         if (empty($param)) {

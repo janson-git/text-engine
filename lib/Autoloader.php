@@ -17,8 +17,10 @@ class Autoloader
         spl_autoload_register(array($this, 'load'), true);
     }
 
-    public function load($className) {
+    public function load($className)
+    {
         $className = str_replace('_', DIRECTORY_SEPARATOR, $className);
+        $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
         $filename  = $className . '.php';
         foreach ($this->paths as $path) {
             $fullPath = $path . DIRECTORY_SEPARATOR . $filename;

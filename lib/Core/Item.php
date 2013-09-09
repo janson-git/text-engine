@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Item
 {
     private $_itemId;

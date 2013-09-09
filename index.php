@@ -4,34 +4,29 @@ error_reporting(E_ALL | E_STRICT);
 
 define('GAME_DIR', __DIR__);
 
-require_once GAME_DIR . DIRECTORY_SEPARATOR . 'core/Autoloader.php';
+require_once GAME_DIR . DIRECTORY_SEPARATOR . 'lib/Autoloader.php';
 $autoloader = new Autoloader();
-$autoloader->addPath(GAME_DIR . DIRECTORY_SEPARATOR . 'core');
+$autoloader->addPath(GAME_DIR . DIRECTORY_SEPARATOR . 'lib');
 $autoloader->register();
 
 
-Game::setMazeConfigFilePath(GAME_DIR . DIRECTORY_SEPARATOR . 'gameMazeConfig.php');
-Game::createMaze(new MapMazeFactory());
+Core\Game::setMazeConfigFilePath(GAME_DIR . DIRECTORY_SEPARATOR . 'gameMazeConfig.php');
+Core\Game::createMaze(new Core\MapMazeFactory());
 
 // start game with look for current room
-Game::executeCommand('look');
-
-
-readline_completion_function(function($currWord, $stringPosition) {
-    return GameDictionary::getCommandsList();
-});
-
+Core\Game::executeCommand('look');
+// game commands completion if accessible
+Core\Game::tryInitCommandCompletion();
 
 // START GAME LOOP. 'exit' command will stop execution
 while (true) {
-//    $command = fgets(STDIN);
-    $command = readline("> ");
+    $command = Core\Game::getCommand();
     $command = trim($command);
     if ($command == 'exitgame' || $command == 'exit') {
         break;
     }
 
-    Game::executeCommand($command);
+    Core\Game::executeCommand($command);
 }
 
 exit;
