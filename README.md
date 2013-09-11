@@ -9,6 +9,11 @@ Supports readline completes for command hints.
 Start:
 
   $ php index.php
+  
+To exit game just command:
+
+  > exit
+
 
 Expected commands format:
 
