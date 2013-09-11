@@ -6,7 +6,8 @@ class Player
 {
     /** @var MapRoom */
     private $_currentRoom = null;
-    private $_items = array();
+    /** @var Item[] */
+    private $_items = [];
 
     private static $_instance = null;
 
@@ -61,7 +62,7 @@ class Player
     {
         // check $itemId - may be it just a part of item name
         // example: given 'test', but we have test_sword and test_box in room.
-        $roomItems = $this->_currentRoom->getRoomItemsNamesList($itemId);
+        $roomItems = $this->_currentRoom->getRoomItemsNamesList();
         
         if (count($roomItems) > 1) {
             return "What are you want to take: " . implode(', ', $roomItems);
@@ -99,6 +100,12 @@ class Player
      */
     public function getInventoryList()
     {
-        return $this->_items;
+        $itemNames = [];
+        if (count($this->_items) > 0) {
+            foreach ($this->_items as $item) {
+                $itemNames[] = $item->getId();
+            }
+        }
+        return $itemNames;
     }
 }

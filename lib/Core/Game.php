@@ -10,7 +10,7 @@ class Game
     private static $_gameMaze = null;
 
     // проверяются направления, для построения лабиринта
-    private static $_directions = array('north', 'south', 'west', 'east');
+    private static $_directions = ['north', 'south', 'west', 'east'];
 
     /**
      * @var MapMazeFactory
@@ -116,14 +116,14 @@ class Game
     }
 
 
-    private static $_aliases = array(
+    private static $_aliases = [
         'n' => 'north',
         's' => 'south',
         'w' => 'west',
         'e' => 'east',
         'i' => 'inventory',
         'l' => 'look',
-    );
+    ];
 
 
     public static function tryInitCommandCompletion()
@@ -134,14 +134,10 @@ class Game
                 $fullLine = readline_info()['line_buffer'];
                 // if not first word - return list of items for current room and player inventory
                 if (strrpos($fullLine, ' ') !== false && strrpos($fullLine, ' ') < strrpos($fullLine, $currWord)) {
-                    $roomItems = Player::getInstance()->getCurrentRoom()->getRoomItemsNamesList();
+                    $roomItems   = Player::getInstance()->getCurrentRoom()->getRoomItemsNamesList();
                     $playerItems = Player::getInstance()->getInventoryList();
-                    $itemNames = array();
-                    foreach ($playerItems as $itemId => $item) {
-                        $itemNames[] = $itemId;
-                    }
-                    $items = array_unique(array_merge($roomItems, $playerItems));
-                    return $items;
+                    
+                    return array_unique(array_merge($roomItems, $playerItems));
                 }
                 // return commands
                 return Dictionary::getCommandsList();

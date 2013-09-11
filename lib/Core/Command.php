@@ -53,12 +53,7 @@ class Command
      */
     public static function inventory()
     {
-        $items = Player::getInstance()->getInventoryList();
-
-        $itemNames = array();
-        foreach ($items as $itemId => $item) {
-            $itemNames[] = $itemId;
-        }
+        $itemNames = Player::getInstance()->getInventoryList();
 
         $itemList = implode(',', $itemNames);
         if (empty($itemList)) {
@@ -84,7 +79,7 @@ class Command
             if (empty($items)) {
                 return 'Nothing to take';
             }
-            $messages = array();
+            $messages = [];
             foreach ($items as $itemId => $item) {
                 array_push($messages, $player->takeItem($itemId));
             }
@@ -118,8 +113,8 @@ class Command
             if (empty($items)) {
                 return 'Nothing to drop';
             }
-            $messages = array();
-            foreach ($items as $itemId => $item) {
+            $messages = [];
+            foreach ($items as $itemId) {
                 array_push($messages, $player->dropItem($itemId));
             }
             return implode("\n", $messages);

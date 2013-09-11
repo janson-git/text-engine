@@ -5,11 +5,11 @@ namespace Core;
 
 class MapRoom extends MapSite
 {
-    private $_sides = array();
+    private $_sides = [];
     private $_roomId;
     private $_description;
     /** @var Item[] array  */
-    private $_items = array();
+    private $_items = [];
 
 
     public function __construct($roomId)
@@ -49,14 +49,14 @@ class MapRoom extends MapSite
     public function getRoomDescription()
     {
         // get room sides description
-        $doors = array();
+        $doors = [];
         foreach ($this->_sides as $direction => $side) {
             if ($side instanceof MapDoor) {
                 $doors[] = $direction;
             }
         }
 
-        $items = array();
+        $items = [];
         foreach ($this->_items as $itemId => $item) {
             $items[] = $itemId;
         }

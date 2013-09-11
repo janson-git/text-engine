@@ -4,7 +4,7 @@ namespace Core;
 
 class MapMaze
 {
-    private $_rooms = array();
+    private $_rooms = [];
 
     public function __construct() {}
 

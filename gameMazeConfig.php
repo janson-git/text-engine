@@ -1,26 +1,26 @@
 <?php
 
-return array(
-    'rooms' => array(
-        'northRoom' => array(
+return [
+    'rooms' => [
+        'northRoom' => [
             'id' => 'northRoom',
             'startRoom' => true,
-            'doors' => array(
+            'doors' => [
                 'south' => 'southRoom',
-            ),
+            ],
             'description' => "It's a north room of tower. Old prison for political prisoners.",
-            'items' => array(
-                'test_box' => array(
+            'items' => [
+                'test_box' => [
                     'id' => 'test_box',
                     'description' => 'A little test box. When you try to shake it - you can hear some noise.'
-                ),
-            ),
-        ),
-        'southRoom' => array(
+                ],
+            ],
+        ],
+        'southRoom' => [
             'id' => 'southRoom',
-            'doors' => array(
+            'doors' => [
                 'north' => 'northRoom',
-            ),
+            ],
             'description' => "Nice room with orange walls. Warm wind blows from ventilation on top.",
             'items' => [
                 'test_sword' => [
@@ -28,6 +28,6 @@ return array(
                     'description' => 'A little sharp test sword.'
                 ],
             ],
-        ),
-    ),
-);
+        ],
+    ],
+];

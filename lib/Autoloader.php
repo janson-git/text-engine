@@ -2,7 +2,7 @@
 
 class Autoloader
 {
-    private $paths = array();
+    private $paths = [];
 
     public function addPath($path)
     {
@@ -14,7 +14,7 @@ class Autoloader
 
     public function register()
     {
-        spl_autoload_register(array($this, 'load'), true);
+        spl_autoload_register([$this, 'load'], true);
     }
 
     public function load($className)
