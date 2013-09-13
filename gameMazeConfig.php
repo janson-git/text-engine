@@ -10,9 +10,10 @@ return [
             ],
             'description' => "It's a north room of tower. Old prison for political prisoners.",
             'items' => [
-                'test_box' => [
-                    'id' => 'test_box',
-                    'description' => 'A little test box. When you try to shake it - you can hear some noise.'
+                'magic box' => [
+                    'id' => 'magic box',
+                    'description' => 'A little magic box. When you try to shake it - you can hear some noise.',
+                    'type' => 'item',
                 ],
             ],
         ],
@@ -23,9 +24,10 @@ return [
             ],
             'description' => "Nice room with orange walls. Warm wind blows from ventilation on top.",
             'items' => [
-                'test_sword' => [
-                    'id' => 'test_sword',
-                    'description' => 'A little sharp test sword.'
+                'sword' => [
+                    'id' => 'sword',
+                    'description' => 'A little sharp sword.',
+                    'type' => 'weapon',
                 ],
             ],
         ],

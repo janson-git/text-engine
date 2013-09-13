@@ -61,6 +61,7 @@ class Game
                 foreach ($room['items'] as $item) {
                     $itemObj = new Item($item['id']);
                     $itemObj->setDescription($item['description']);
+                    $itemObj->setType($item['type']);
                     $roomObj->putItem($itemObj);
                  
                     // fill game dictionary

@@ -64,7 +64,7 @@ class Player
         // example: given 'test', but we have test_sword and test_box in room.
         $roomItems = $this->_currentRoom->getRoomItemsNamesList();
         
-        if (count($roomItems) > 1) {
+        if (!in_array($itemId, $roomItems) && count($roomItems) > 1) {
             return "What are you want to take: " . implode(', ', $roomItems);
         }
         

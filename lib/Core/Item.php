@@ -6,6 +6,7 @@ class Item
 {
     private $_itemId;
     private $_description;
+    private $_type;
 
     public function __construct($itemId)
     {
@@ -34,5 +35,21 @@ class Item
     public function getDescription()
     {
         return $this->_description;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->_type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
     }
 }
