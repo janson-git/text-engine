@@ -38,3 +38,6 @@ And list of supported commands:
 Commands _take_ and _drop_ can accept item name to drop or _all_ param (to take all room's items or drop all inventory items):
 
   > take test_box
+
+  > drop all
+  
